@@ -1,4 +1,7 @@
-<?php require('connection.php') ?>
+<?php 
+    require('connection.php');
+    session_start();
+?>
 
 
 <!DOCTYPE html>
@@ -104,6 +107,19 @@
             </form>
         </div>
     </div>
+
+    <?php
+        if (isset($_SESSION['logged_in']))
+        {
+            echo"
+                <h1
+                    style='text-align: center; margin-top: 200px;'
+                >
+                    Welcome to the website - $_SESSION[username]                 
+                </h1>
+            ";
+        }
+    ?>
 
 
     <script>

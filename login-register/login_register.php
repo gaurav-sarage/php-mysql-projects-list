@@ -2,6 +2,8 @@
 
 require('connection.php');
 
+session_start();
+
 # for login
 if (isset($_POST['login']))
 {
@@ -13,7 +15,9 @@ if (isset($_POST['login']))
             $result_fetch = mysqli_fetch_assoc($result);
             if (password_verify($_POST['password'], $result_fetch['password'])) {
                 # if password metched
-                echo"Right";
+                $_SESSION['logged_in'] = true;
+                $_SESSION['username'] = $result_fetch['user_name'];
+                header("location: index.php");   
             }
             else {
                 # if incorrect password
