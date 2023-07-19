@@ -1,3 +1,6 @@
+<?php require('connection.php') ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,10 @@
 
     <div class="popup-container" id="login-popup">
         <div class="popup">
-            <form>
+            <form  
+                method="POST"
+                action="login_register.php"
+            >
                 <h2>
                     <span>User Login</span>
                     <button 
@@ -37,12 +43,20 @@
                 <input 
                     type="text" 
                     placeholder="Enter your E-mail or username"
+                    name="email_username"
                 >
                 <input 
                     type="password" 
                     placeholder="Enter your password"
+                    name="password"
                 >
-                <button type="submit" class="login-btn">Login</button>
+                <button 
+                    type="submit"
+                    class="login-btn"
+                    name="login"
+                >
+                    Login
+                </button>
             </form>
         </div>
     </div>
@@ -50,7 +64,7 @@
 
     <div class="popup-container" id="register-popup">
         <div class="register popup">
-            <form>
+            <form method="POST" action="login_register.php">
                 <h2>
                     <span>User Register</span>
                     <button 
@@ -63,21 +77,30 @@
                 <input 
                     type="text" 
                     placeholder="Enter your Full Name"
+                    name="fullname"
                 >
                 <input 
                     type="text"
                     placeholder="Enter your Username"
-                
+                    name="username"
                 >
                 <input 
                     type="email" 
                     placeholder="Enter your E-mail"
+                    name="email"
                 >
                 <input 
                     type="password"
                     placeholder="Enter your Password"
+                    name="password"
                 >
-                <button type="submit" class="register-btn">Register</button>
+                <button 
+                    type="submit" 
+                    class="register-btn"
+                    name="register"
+                >
+                    Register
+                </button>
             </form>
         </div>
     </div>
