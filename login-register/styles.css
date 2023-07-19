@@ -88,7 +88,8 @@ div.popup-container div.popup input {
     outline: none;
 }
 
-div.popup-container div.popup button.login-btn {
+div.popup-container div.popup button.login-btn,
+div.popup-container div.register button.register-btn {
     font-weight: 550;
     font-size: 14px;
     background-color: #30475e;
@@ -97,4 +98,20 @@ div.popup-container div.popup button.login-btn {
     border: none;
     outline: none;
     margin-top: 5px;
+}
+
+div.popup-container div.register {
+    background-color: #edeef7;
+}
+
+div.popup-container div.register h2 {
+    color: #fa9579;
+}
+
+div.popup-container div.register input {
+    border-bottom-color: #fa9579;
+}
+
+div.popup-container div.register button.register-btn {
+    background-color: #fa9579;
 }

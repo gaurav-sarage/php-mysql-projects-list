@@ -43,7 +43,7 @@
 
 
     <div class="popup-container">
-        <div class="popup">
+        <div class="register popup">
             <form>
                 <h2>
                     <span>User Register</span>
