@@ -116,3 +116,15 @@ div.popup-container div.register input {
 div.popup-container div.register button.register-btn {
     background-color: #fa9579;
 }
+
+div.user {
+    color: #30475e;
+    background-color: #75cfb8;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 900;
+}
+
+div.user a {
+    color: #30475e;
+}
