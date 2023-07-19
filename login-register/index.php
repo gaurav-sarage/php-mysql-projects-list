@@ -26,8 +26,14 @@
             <form>
                 <h2>
                     <span>User Login</span>
-                    <button type="reset">X</button>
+                    <button 
+                        type="reset" 
+                        onclick="popup('login-popup')"
+                    >
+                        X
+                    </button>
                 </h2>
+
                 <input 
                     type="text" 
                     placeholder="Enter your E-mail or username"
@@ -47,7 +53,12 @@
             <form>
                 <h2>
                     <span>User Register</span>
-                    <button type="reset">X</button>
+                    <button 
+                        type="reset"
+                        onclick="popup('register-popup')"
+                    >
+                        X
+                    </button>
                 </h2>
                 <input 
                     type="text" 
