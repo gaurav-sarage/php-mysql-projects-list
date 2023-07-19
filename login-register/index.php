@@ -16,12 +16,12 @@
             <a href="index.php">ABOUT</a>
         </nav>
         <div class="sign-in-up">
-            <button type="button">LOGIN</button>
-            <button type="button">REGISTER</button>
+            <button type="button" onclick="popup('login-popup')">LOGIN</button>
+            <button type="button" onclick="popup('register-popup')">REGISTER</button>
         </div>
     </header>
 
-    <div class="popup-container">
+    <div class="popup-container" id="login-popup">
         <div class="popup">
             <form>
                 <h2>
@@ -42,7 +42,7 @@
     </div>
 
 
-    <div class="popup-container">
+    <div class="popup-container" id="register-popup">
         <div class="register popup">
             <form>
                 <h2>
@@ -70,5 +70,18 @@
             </form>
         </div>
     </div>
+
+
+    <script>
+        function popup(popup_name) {
+            get_popup = document.getElementById(popup_name);
+            if (get_popup.style.display == "flex") {
+                get_popup.style.display = "none";
+            } else {
+                get_popup.style.display = "flex";
+            }
+        }
+    </script>
+
 </body>
 </html>
