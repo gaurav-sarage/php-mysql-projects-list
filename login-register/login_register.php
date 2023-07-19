@@ -5,12 +5,25 @@ require('connection.php');
 # for login
 if (isset($_POST['login']))
 {
-    $query = "SELECT * FROM `registered_users` WHERE `email` = '$_POST[email_username]' OR `username` = '$_POST[email_username]'";
+    $query = "SELECT * FROM `registered_users` WHERE `email` = '$_POST[email_username]' OR `user_name` = '$_POST[email_username]'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
         if (mysqli_num_rows($result) == 1) {
             $result_fetch = mysqli_fetch_assoc($result);
+            if (password_verify($_POST['password'], $result_fetch['password'])) {
+                # if password metched
+                echo"Right";
+            }
+            else {
+                # if incorrect password
+                echo"
+                    <script>
+                        alert('Incorrect password');
+                        window.location.href = 'index.php'; 
+                    </script>
+                ";
+            }
         } 
         else {
             echo"
