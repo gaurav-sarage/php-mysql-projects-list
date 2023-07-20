@@ -155,6 +155,15 @@
             echo "<h3 class='box'> Your Referral Code: $result_fetch[referral_code]</h3>";
 
             echo "<h3 class='box'> Your Referral Points: $result_fetch[referral_point]</h3>";
+
+            echo "
+                <h3 class='box'> Your Referral Link: 
+                    <a 
+                        href='http://localhost/referral-system/?refer=$result_fetch[referral_code]'
+                    >
+                        http://localhost/referral-system/?refer=$result_fetch[referral_code]
+                    </a>                
+                </h3>";
         }
 
     ?>
