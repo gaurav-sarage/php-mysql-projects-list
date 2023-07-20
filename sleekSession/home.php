@@ -46,11 +46,15 @@
                                         <div
                                             class="flex-shrink-0 mx-2 my-4 rounded-full overflow-hidden h-12 w-12 cursor-pointer">
                                                 <img
-                                                class="w-full h-auto rounded-full select-none" src="PROFILE-IMAGE" alt="Profile Image">
+                                                class="w-full h-auto rounded-full select-none" src="<?php
+                                                    echo BASE_URL.$user->profileImage;
+                                                ?>" alt="Profile Image">
                                         </div>
                                         <div>
                                             <span class="font-medium select-none">
-                                                NAME
+                                                <?php
+                                                    echo $user->name;
+                                                ?>
                                             </span>
                                         </div>
                                     </div>     
@@ -79,7 +83,9 @@
                                     Users
                                 </h2>
                                 <ul class="select-none">
-                                    <!-- User List -->
+                                    <?php
+                                        $userObj->getUsers();
+                                    ?>
                                 </ul>
                             </div>
                         </div>

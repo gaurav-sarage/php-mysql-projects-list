@@ -63,6 +63,36 @@
             session_regenerate_id();
             $this->redirect('index.php');
         }
+
+        public function getUsers() {
+            $statement = $this->db->prepare("SELECT * FROM `users` WHERE `userID` != :userID");
+
+            $statement->bindParam(":userID", $this->userID, PDO::PARAM_INT);
+
+            $statement->execute();
+
+            $users = $statement->fetchAll(PDO::FETCH_OBJ);
+
+            foreach($users as $user) {
+                echo '<li class="select-none transition     hover:bg-green-50 p-4 cursor-pointer select-none">
+                    <a href="'.BASE_URL.$user->username.'">
+                        <div class="user-box flex items-center flex-wrap">
+                            <div class="flex-shrink-0 user-img w-14 h-14 rounded-full border overflow-hidden">
+                                <img class="w-full h-full" src="'.BASE_URL.$user->profileImage.'">
+                            </div>
+                        <div class="user-name ml-2">
+                        <div>
+                            <span class="flex font-medium">
+                            '.$user->name.'
+                            </span>
+                        </div>
+                        <div></div>
+                    </div>
+                    </div>
+                </a>
+            </li>';
+            }
+        }
     }
 
 ?>
