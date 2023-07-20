@@ -35,7 +35,7 @@
             
                 <div class="right-heading w-full flex flex-col items-center">
                     <div>
-                        <h2 class="text-center" style="padding-top:0px;">Wellcome!</h2>
+                        <h2 class="text-center" style="padding-top:0px;">Welcome!</h2>
                         <p>Sign-in into your account.</p>
                     </div>
                 <form method="post" class="w-full">
