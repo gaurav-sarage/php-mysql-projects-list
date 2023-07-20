@@ -122,6 +122,11 @@
                     placeholder="Enter your Password"
                     name="password"
                 >
+                <input 
+                    type="text"
+                    placeholder="Enter your referral code"
+                    name="refcode"
+                    >
                 <button 
                     type="submit" 
                     class="register-btn"
@@ -144,6 +149,7 @@
                 </h1>
             ";
         }
+
     ?>
 
 
