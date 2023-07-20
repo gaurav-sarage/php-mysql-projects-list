@@ -126,6 +126,7 @@
                     type="text"
                     placeholder="Enter your referral code"
                     name="refcode"
+                    id="refercode"
                     >
                 <button 
                     type="submit" 
@@ -179,6 +180,34 @@
             }
         }
     </script>
+
+    <?php
+        if(isset($_GET['refer']) && $_GET['refer'] != '')
+        {
+            if (!(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true))
+            {
+                $query = "SELECT * FROM `registered_users` WHERE `referral_code` = '$_GET[refer]'";
+
+                $result = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result) == 1){
+                    echo"
+                        <script>
+                            document.getElementById('refercode').value='$_GET[refer]';
+                            popup('register-popup');
+                        </script>
+                    ";
+                }
+                else {
+                    echo"
+                        <script>
+                            alert('Invalid Referral Code');
+                        </script>
+                    ";
+                }
+            }
+        }
+    ?>
 
 </body>
 </html>
