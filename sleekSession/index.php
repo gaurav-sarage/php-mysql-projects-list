@@ -1,3 +1,32 @@
+<?php
+
+    if($_SERVER['REQUEST_METHOD'] === "POST")
+    {
+        if (isset($_POST))
+        {
+            $email = trim(stripcslashes(htmlentities($_POST['email'])));
+            $password = $_POST['password'];
+            
+            if(!empty($email) && !empty($password)) {
+                // validate
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+                {
+                    $error = "Invalid email format";
+                } else {
+                    
+                }
+            }
+            else {
+                // display error
+                $error = "Please enter your email & password to login";
+            }
+        }
+    }
+
+?>
+
+
+
 <html>
 <head>
     <title>Live Video Chat Using PHP</title>
@@ -41,11 +70,24 @@
                 <form method="post" class="w-full">
                  <div class="w-full flex flex-col items-center">
                     <div class="flex w-2/4 flex-col my-2 items-center">
-                        <input class="w-4/5 my-2 border border-gray-200 rounded px-4 py-2" type="email" name="email" placeholder="Email">
+                        <input 
+                            class="w-4/5 my-2 border border-gray-200 rounded px-4 py-2" type="email"
+                            name="email"
+                            placeholder="Email"
+                        >
 
-                        <input class="w-4/5 my-2 border border-gray-200 rounded px-4 py-2" type="password" name="password" placeholder="Password">
-                         <div class="select-none  error text-red-500 text-xs p-2 px-2 w-auto self-start ml-20">
+                        <input 
+                            class="w-4/5 my-2 border border-gray-200 rounded px-4 py-2" type="password" 
+                            name="password" placeholder="Password"
+                        >
+
+                        <div class="select-none  error text-red-500 text-xs p-2 px-2 w-auto self-start ml-20">
                             <!-- ERROR -->
+                            <?php
+                                if(isset($error)) {
+                                    echo $error;
+                                }
+                            ?>
                         </div>
                     </div>
                     <div>
