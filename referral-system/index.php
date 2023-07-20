@@ -142,12 +142,19 @@
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true)
         {
             echo"
-                <h1
-                    style='text-align: center; margin-top: 200px;'
-                >
+                <h1 style='text-align: center; margin-top: 200px;'                >
                     Welcome to the website - $_SESSION[username]                 
-                </h1>
+                </h1>            
             ";
+
+            $query = "SELECT * FROM `registered_users` WHERE `user_name` = '$_SESSION[username]'";
+
+            $result = mysqli_query($conn, $query);
+            $result_fetch = mysqli_fetch_assoc($result);
+
+            echo "<h3 class='box'> Your Referral Code: $result_fetch[referral_code]</h3>";
+
+            echo "<h3 class='box'> Your Referral Points: $result_fetch[referral_point]</h3>";
         }
 
     ?>
