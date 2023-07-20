@@ -1,52 +1,10 @@
 <?php 
 
 require('connection.php');
+
 session_start();
 
-function updateReferral() {
-    $query = "SELECT * FROM `registered_users` WHERE `referral_code` = '$_POST[refcode]'";
-
-    $result = mysqli_query($GLOBALS['conn'], $query);
-
-    if($result) {
-        if (mysqli_num_rows($result) == 1) {
-            $result_fetch = mysqli_fetch_assoc($result);
-
-            $point = $result_fetch['referral_point'] + 10;
-
-            $update_query = "UPDATE `registered_users` SET `referral_point` = '$point' WHERE `email` = '$result_fetch[email]'";
-
-            if(!mysqli_query($GLOBALS['conn'], $update_query))
-            {
-                echo"
-                    <script>
-                        alert('Cannot Run Query');
-                        window.location.href = 'index.php'; 
-                    </script>
-                ";
-                exit;
-            }
-        }
-        else {
-            echo"
-                <script>
-                    alert('Invalid Referral Code');
-                    window.location.href = 'index.php'; 
-                </script>
-            ";
-            exit;
-        }
-    } else {
-        echo"
-            <script>
-                alert('Cannot Run Query');
-                window.location.href = 'index.php'; 
-            </script>
-        ";
-        exit;
-    }
-}
-
+# for login
 if (isset($_POST['login']))
 {
     $query = "SELECT * FROM `registered_users` WHERE `email` = '$_POST[email_username]' OR `user_name` = '$_POST[email_username]'";
@@ -122,17 +80,9 @@ if (isset($_POST['register']))
         }
         else # this query will be executed when no one has taken username or email before
         {
-            if($_POST['refcode'] != '')
-            {
-                updateReferral();
-            }
-
-            $referral_code = strtoupper(bin2hex(random_bytes(3)));            
-
-
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-            $query = "INSERT INTO `registered_users`(`full_name`, `user_name`, `email`, `password`, `referral_code`, `referral_point`) VALUES ('$_POST[fullname]','$_POST[username]','$_POST[email]','$password', '$referral_code', 0)";
+            $query = "INSERT INTO `registered_users`(`full_name`, `user_name`, `email`, `password`) VALUES ('$_POST[fullname]','$_POST[username]','$_POST[email]','$password')";
 
             if(mysqli_query($conn, $query)) {
                 # if data inserted successfully
@@ -163,5 +113,6 @@ if (isset($_POST['register']))
         ";
     }
 }
+
 
 ?>

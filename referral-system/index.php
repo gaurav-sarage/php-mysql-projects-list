@@ -122,12 +122,6 @@
                     placeholder="Enter your Password"
                     name="password"
                 >
-                <input 
-                    type="text"
-                    placeholder="Enter your referral code"
-                    name="refcode"
-                    id="refercode"
-                    >
                 <button 
                     type="submit" 
                     class="register-btn"
@@ -143,30 +137,13 @@
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true)
         {
             echo"
-                <h1 style='text-align: center; margin-top: 200px;'                >
+                <h1
+                    style='text-align: center; margin-top: 200px;'
+                >
                     Welcome to the website - $_SESSION[username]                 
-                </h1>            
+                </h1>
             ";
-
-            $query = "SELECT * FROM `registered_users` WHERE `user_name` = '$_SESSION[username]'";
-
-            $result = mysqli_query($conn, $query);
-            $result_fetch = mysqli_fetch_assoc($result);
-
-            echo "<h3 class='box'> Your Referral Code: $result_fetch[referral_code]</h3>";
-
-            echo "<h3 class='box'> Your Referral Points: $result_fetch[referral_point]</h3>";
-
-            echo "
-                <h3 class='box'> Your Referral Link: 
-                    <a 
-                        href='http://localhost/referral-system/?refer=$result_fetch[referral_code]'
-                    >
-                        http://localhost/referral-system/?refer=$result_fetch[referral_code]
-                    </a>                
-                </h3>";
         }
-
     ?>
 
 
@@ -180,34 +157,6 @@
             }
         }
     </script>
-
-    <?php
-        if(isset($_GET['refer']) && $_GET['refer'] != '')
-        {
-            if (!(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true))
-            {
-                $query = "SELECT * FROM `registered_users` WHERE `referral_code` = '$_GET[refer]'";
-
-                $result = mysqli_query($conn, $query);
-
-                if (mysqli_num_rows($result) == 1){
-                    echo"
-                        <script>
-                            document.getElementById('refercode').value='$_GET[refer]';
-                            popup('register-popup');
-                        </script>
-                    ";
-                }
-                else {
-                    echo"
-                        <script>
-                            alert('Invalid Referral Code');
-                        </script>
-                    ";
-                }
-            }
-        }
-    ?>
 
 </body>
 </html>
