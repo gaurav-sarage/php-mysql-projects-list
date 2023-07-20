@@ -1,5 +1,7 @@
 <?php
 
+    include 'core/init.php';
+
     if($_SERVER['REQUEST_METHOD'] === "POST")
     {
         if (isset($_POST))
@@ -13,7 +15,9 @@
                 {
                     $error = "Invalid email format";
                 } else {
-                    
+                    if ($user = $userObj->emailExist($email)) {
+                        var_dump($user);
+                    }
                 }
             }
             else {
