@@ -1,12 +1,13 @@
 <?php
-
+    namespace MyApp;
+    use PDO;
     class User {
 
         public $db, $userID, $sessionID;
 
         public function __construct()
         {
-            $db = new DB;
+            $db = new \MyApp\DB;
             $this->db = $db->connect();
             $this->userID = $this->ID();
             $this->sessionID = $this->getSessionID();
