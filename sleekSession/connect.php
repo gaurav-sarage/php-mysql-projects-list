@@ -103,25 +103,24 @@
             <!--RIGHT_SIDE-->
             <div class="flex-2 flex rounded-xl w-full h-full ">
                 <!-- PROFILE -->
-                <!--PROFILE_SECTION-->
+
                 <div id="profile" class="flex flex-1 justify-center items-center">
                     <div class="flex flex-col flex-1 h-full overflow-hidden overflow-y-auto items-center justify-center">
                         <div class="w-60 h-60 right-img rounded-full overflow-hidden">
                             <img class="h-auto w-full" src="<?php echo BASE_URL.$profileData->profileImage;?>">
                         </div>
                         <div class="right-heading">
-                            <h2 class="text-center"><?php echo $profileData->name; ?></h2>
+                            <h2 class="text-center">
+                                <?php echo $profileData->name; ?>
+                            </h2>
                             <p>Do you want to make a Call?</p>
-                            <button 
-                                id="callBtn" 
-                                data-user="<?php echo $profileData->userID; ?>" class="active:-top-2 relative transition border border-gray-400 shadow-md my-4 bg-green-400 hover:bg-green-500 p-4 px-5 rounded-full text-white text-xl">
-                                <i
-                                    class="fas fa-video">
-                                </i>
-                            <button>
+                                <button 
+                                    id="callBtn" data-user="<?php echo $profileData->userID; ?>" class="active:-top-2 relative transition border border-gray-400 shadow-md my-4 bg-green-400 hover:bg-green-500 p-4 px-5 rounded-full text-white text-xl"><i class="fas fa-video"></i>
+                                </button>
                         </div>
                     </div>
                 </div>
+                    <!--PROFILE_SECTION_END-->  
                 <!--PROFILE_SECTION_END-->  
                 <!-- VIDEO -->
                 <div id="video" class="hidden overflow-hidden flex items-center">
