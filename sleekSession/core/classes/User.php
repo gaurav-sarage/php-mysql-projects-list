@@ -93,6 +93,19 @@
             </li>';
             }
         }
+
+        public function getUserByUsername($username = '') {
+
+            $statement = $this->db->prepare("SELECT * FROM `users` WHERE `username` = :username");
+
+            $statement->bindParam(":username", $username, PDO::PARAM_STR);
+
+            $statement->execute();
+
+            return $statement->fetch(PDO::FETCH_OBJ);
+            
+        }
+
     }
 
 ?>
