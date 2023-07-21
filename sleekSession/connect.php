@@ -42,7 +42,12 @@
             crossorigin="anonymous"></script>
             <!-- Jquery timer -->
             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timer.jquery/0.7.0/timer.jquery.js">    
-        </script>          
+        </script>
+
+        <script type="text/javascript">
+            const conn = new WebSocket('ws://localhost:8080/?token=<?php echo $userObj->sessionID; ?>');
+        </script>
+
     </head>
     <body>
     <!-- AlertPopup -->

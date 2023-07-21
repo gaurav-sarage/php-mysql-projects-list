@@ -4,7 +4,7 @@
 // buttons
 let callBtn = $('#callBtn');
 
-let peerConnection;
+let pc;
 let sendTo = callBtn.data('user');
 let localStream;
 
@@ -13,18 +13,15 @@ let localStream;
 const localVideo = document.querySelector("#localVideo");
 const remoteVideo = document.querySelector("#remoteVideo");
 
-// media info
 const mediaConst = {
-    video: true
+    video:true
 };
 
-
 function getConnection() {
-    if(!peerConnection) {
-        peerConnection = new RTCPeerConnection();
+    if(!pc) {
+        pc = new RTCPeerConnection();
     }
 }
-
 
 // function to ask for media input from user
 
@@ -32,16 +29,17 @@ async function getCam() {
     let mediaStream;
 
     try {
-        if (!peerConnection) {
+        if(!pc) {
             await getConnection();
         }
 
         mediaStream = await navigator.mediaDevices.getUserMedia(mediaConst);
 
         localVideo.srcObject = mediaStream;
-        localStream = mediaStream;
-        localStream.getTracks().forEach( track => peerConnection.addTrack(track, localStream) );
 
+        localStream = mediaStream;
+
+        localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
 
     } catch(error) {
         console.log(error);
@@ -50,4 +48,4 @@ async function getCam() {
 
 $('#callBtn').on('click', () => {
     getCam();
-});
+})
