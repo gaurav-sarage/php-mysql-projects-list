@@ -3,6 +3,9 @@
 
 // buttons
 let callBtn = $('#callBtn');
+let callBox = $('#CallBox');
+let answerBtn = $('#answerBtn');
+let declineBtn = $('#declineBtn');
 
 let pc;
 let sendTo = callBtn.data('user');
@@ -87,6 +90,9 @@ conn.onmessage = async e => {
     let profileImage = message.profileImage;
     let username = message.username;
 
+    $('#username').text(username);
+    $('#profileImage').attr('src', profileImage);
+
     switch(type) {
         case 'is-client-ready':
             if(!pc) {
@@ -97,7 +103,12 @@ conn.onmessage = async e => {
             }
             else {
                 // display call
-                alert('user is calling!');
+                displayCall();
+
+                declineBtn.on('click', () => {
+                    send('client-rejected', null, sendTo);
+                    location.reload(true);
+                });
             }
         break;
 
@@ -105,6 +116,10 @@ conn.onmessage = async e => {
             // display popup
 
             setTimeout('window.location.reload(true)', 2000);
+        break;
+
+        case 'client-rejected':
+            alert('client rejected the call');
         break;
     }
 
@@ -117,4 +132,9 @@ function send(type, data, sendTo) {
         type:type,
         data:data
     }));
+}
+
+function displayCall() {
+    callBox.removeClass('hidden');
+    $('.wrapper').addClass('glass');
 }

@@ -46,7 +46,7 @@ class Chat implements MessageComponentInterface {
             if ($from !== $client) {
                 // The sender is not the receiver, send to each client connected
                 if ($client->resourceId == $sendTo->connectionID || $from == $client){
-                    $client->send($msg);
+                    $client->send(json_encode($send));
                 }
             }
         }
