@@ -104,12 +104,22 @@ conn.onmessage = async e => {
             else {
                 // display call
                 displayCall();
+                
+                answerBtn.on('click', () => {
+                    callBox.addClass('hidden');
+                    $('.wrapper').removeClass('glass');
+                    send('client-is-ready', null, sendTo);
+                });
 
                 declineBtn.on('click', () => {
                     send('client-rejected', null, sendTo);
                     location.reload(true);
                 });
             }
+        break;
+
+        case 'client-is-ready':
+            createOffer(sendTo);
         break;
 
         case 'client-already-oncall':
