@@ -86,6 +86,12 @@ function sendIceCandidate(sendTo) {
             send('client-candidate', e.candidate, sendTo);
         }
     }
+
+    pc.ontrack = e => {
+        $('#video').removeClass('hidden');
+        $('#profile').addClass('hidden');
+        remoteVideo.srcObject = e.streams[0];
+    }
 }
 
 
@@ -111,9 +117,10 @@ conn.onmessage = async e => {
     $('#profileImage').attr('src', profileImage);
 
     switch(type) {
-
         case 'client-candidate':
-            
+            if (pc.localDescription) {
+                await pc.addIceCandidate(new RTCIceCandidate(data));
+            }
         break;
 
         case 'is-client-ready':
