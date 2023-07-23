@@ -62,6 +62,20 @@ async function createOffer(sendTo) {
     send('client-offer', pc.localDescription, sendTo);
 }
 
+async function createAnswer(sendTo, data) {
+    if(!pc) {
+        await getConnection();
+    }
+
+    if(!localStream) {
+        await getCam();
+    }
+
+    await sendIceCandidate(sendTo);
+    await pc.setRemoteDescription();
+}
+
+
 function sendIceCandidate(sendTo) {
     pc.onicecandidate = e => {
         if (e.candidate !== null) {
@@ -116,6 +130,12 @@ conn.onmessage = async e => {
                     location.reload(true);
                 });
             }
+        break;
+
+        case 'client-offer':
+            createAnswer(sendTo, data);
+
+
         break;
 
         case 'client-is-ready':
