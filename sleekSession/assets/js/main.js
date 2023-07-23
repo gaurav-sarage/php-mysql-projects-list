@@ -72,7 +72,10 @@ async function createAnswer(sendTo, data) {
     }
 
     await sendIceCandidate(sendTo);
-    await pc.setRemoteDescription();
+    await pc.setRemoteDescription(data);
+    await pc.createAnswer();
+    await pc.setLocalDescription(pc.localDescription);
+    send('client-answer', pc.localDescription, sendTo);
 }
 
 
@@ -108,6 +111,11 @@ conn.onmessage = async e => {
     $('#profileImage').attr('src', profileImage);
 
     switch(type) {
+
+        case 'client-candidate':
+            
+        break;
+
         case 'is-client-ready':
             if(!pc) {
                 await getConnection();
@@ -132,10 +140,14 @@ conn.onmessage = async e => {
             }
         break;
 
+        case 'client-answer':
+            if (pc.localDescription){
+                await pc.setRemoteDescription(data);
+            }
+        break;
+
         case 'client-offer':
             createAnswer(sendTo, data);
-
-
         break;
 
         case 'client-is-ready':
