@@ -18,18 +18,28 @@ const localVideo = document.querySelector("#localVideo");
 const remoteVideo = document.querySelector("#remoteVideo");
 
 const mediaConst = {
-    video:true
+    video:true,
+    audio: true
 };
+
+// information about STUN servers
+const config = {
+    iceServers: [
+        {urls: 'stun:stun1.l.google.com:19302'},
+    ]
+}
+
 
 // function to receive info from other client
 
 const options = {
     offerToReceiveVideo: 1,
+    offerToReceiveAudio: 1
 }
 
 function getConnection() {
     if(!pc) {
-        pc = new RTCPeerConnection();
+        pc = new RTCPeerConnection(config);
     }
 }
 
@@ -143,7 +153,7 @@ conn.onmessage = async e => {
                 await getConnection();
             }
             if (pc.iceConnectionState === "connected") {
-                send('client-already-oncall');
+                send('client-already-oncall', null, by);
             }
             else {
                 // display call
