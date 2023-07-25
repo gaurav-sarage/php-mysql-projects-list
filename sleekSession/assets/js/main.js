@@ -148,12 +148,19 @@ conn.onmessage = async e => {
             else {
                 // display call
                 displayCall();
-                
-                answerBtn.on('click', () => {
-                    callBox.addClass('hidden');
-                    $('.wrapper').removeClass('glass');
-                    send('client-is-ready', null, sendTo);
-                });
+
+                if(window.location.href.indexOf(username) > -1) {
+                    answerBtn.on('click', () => {
+                        callBox.addClass('hidden');
+                        $('.wrapper').removeClass('glass');
+                        send('client-is-ready', null, sendTo);
+                    });
+                } else {
+                    answerBtn.on('click', () => {
+                        callBox.addClass('hidden');
+                        redirectToCall(username, by);
+                    });
+                }
 
                 declineBtn.on('click', () => {
                     send('client-rejected', null, sendTo);
@@ -220,4 +227,26 @@ function displayAlert(username, profileImage, message){
     $('.wrapper').addClass('glass');
     $('#video').addClass('hidden');
     $('#profile').removeClass('hidden');
+}
+
+function redirectToCall(username, sendTo) {
+    if(window.location.href.indexOf(username) == -1) {
+        sessionStorage.setItem('redirect', true);
+        sessionStorage.setItem('sendTo', sendTo);
+        window.location.href = '/sleekSession/'+username;
+    }
+}
+
+if (sessionStorage.getItem('redirect')) {
+    sendTo = sessionStorage.getItem('sendTo');
+    let waitForWs = setInterval(() => {
+        if (conn.readyState === 1){
+            send('client-is-ready', null, sendTo);
+            clearInterval(waitForWs);
+        }
+    }, 500);
+
+    sessionStorage.removeItem('redirect');
+    sessionStorage.removeItem('sendTo');
+
 }
