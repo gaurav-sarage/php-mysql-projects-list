@@ -164,11 +164,13 @@ conn.onmessage = async e => {
         case 'client-answer':
             if (pc.localDescription){
                 await pc.setRemoteDescription(data);
+                $('#callTimer').timer({format: '%m:%s'});
             }
         break;
 
         case 'client-offer':
             createAnswer(sendTo, data);
+            $('#callTimer').timer({format: '%m:%s'});
         break;
 
         case 'client-is-ready':
