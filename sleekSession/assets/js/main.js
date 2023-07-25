@@ -94,12 +94,26 @@ function sendIceCandidate(sendTo) {
     }
 }
 
+function hangup() {
+    send('client-hangup', null, sendTo);
+    pc.close();
+    pc = null;
+}
+
 
 
 $('#callBtn').on('click', () => {
     getCam();
     send('is-client-ready', null, sendTo);
 });
+
+
+$('#hangupBtn').on('click', () => {
+    hangup();
+    location.reload(true);
+});
+
+
 
 conn.onopen = e => {
     console.log('connected to websocket');
@@ -164,6 +178,11 @@ conn.onmessage = async e => {
         case 'client-already-oncall':
             // display popup
 
+            setTimeout('window.location.reload(true)', 2000);
+        break;
+
+        case 'client-hangup':
+            alert('call disconnected');
             setTimeout('window.location.reload(true)', 2000);
         break;
 
