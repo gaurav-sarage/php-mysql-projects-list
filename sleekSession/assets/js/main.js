@@ -6,6 +6,7 @@ let callBtn = $('#callBtn');
 let callBox = $('#CallBox');
 let answerBtn = $('#answerBtn');
 let declineBtn = $('#declineBtn');
+let alertBox = $('#alertBox');
 
 let pc;
 let sendTo = callBtn.data('user');
@@ -179,17 +180,18 @@ conn.onmessage = async e => {
 
         case 'client-already-oncall':
             // display popup
-
+            displayAlert(username, profileImage, 'is on another call');
             setTimeout('window.location.reload(true)', 2000);
         break;
 
         case 'client-hangup':
-            alert('call disconnected');
+            displayAlert(username, profileImage, 'disconnected the call');
             setTimeout('window.location.reload(true)', 2000);
         break;
 
         case 'client-rejected':
-            alert('client rejected the call');
+            displayAlert(username, profileImage, ' is busy');
+            setTimeout('window.location.reload(true)', 2000);
         break;
     }
 
@@ -207,4 +209,15 @@ function send(type, data, sendTo) {
 function displayCall() {
     callBox.removeClass('hidden');
     $('.wrapper').addClass('glass');
+}
+
+function displayAlert(username, profileImage, message){
+    alertBox.find('#alertName').text(username);
+    alertBox.find('#alertImage').attr('src', profileImage);
+    alertBox.find('#alertMessage').text(message);
+
+    alertBox.removeClass('hidden');
+    $('.wrapper').addClass('glass');
+    $('#video').addClass('hidden');
+    $('#profile').removeClass('hidden');
 }
